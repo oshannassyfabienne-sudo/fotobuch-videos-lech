@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video</title>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: black;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  /* Video = echter Fullscreen */
+  video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    object-fit: cover;
+  }
+
+  /* Play-Overlay Button */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.25);
+    cursor: pointer;
+  }
+
+  .play-button {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO -->
+<video id="video" playsinline>
+  <source src="https://drive.google.com/file/d/1u-q36qVFVugl2Hg1-tA-hc_VxADDxB31/view?usp=drive_link" type="video/mp4">
+</video>
+
+<!-- PLAY OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="play-button">▶</div>
+</div>
+
+<script>
+  const video = document.getElementById('video');
+  const overlay = document.getElementById('overlay');
+
+  overlay.addEventListener('click', async () => {
+    overlay.classList.add('hidden');
+    try {
+      await video.play();
+    } catch (e) {
+      console.log("Autoplay blockiert");
+    }
+  });
+</script>
+
+</body>
+</html>
